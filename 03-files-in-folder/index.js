@@ -9,17 +9,16 @@ let fileType;
 let fileSize;
 fsPromises.readdir(pathToFolder, { withFileTypes: true }).then((files) => {
   files.forEach((file) => {
-    if (file.isFile) {
+    if (file.isFile()) {
       let pathToFile = path.join(pathToFolder, file.name);
-      // console.log(fileType);
       fs.stat(pathToFile, (err, stats) => {
         if (err) throw err;
-        if (stats.isFile) {
+        if (stats.isFile()) {
           // console.log(stats);
           fileType = path.extname(file.name).slice(1);
-          fileSize = stats.size;
+          fileSize = stats.size / 1000;
           fileName = path.parse(pathToFile).name;
-          console.log(`${fileName} - ${fileType} - ${fileSize}`);
+          console.log(`${fileName} - ${fileType} - ${fileSize}kb`);
         }
       });
     }
