@@ -16,9 +16,9 @@ fsPromises.readdir(pathToFolder, { withFileTypes: true }).then((files) => {
         if (stats.isFile()) {
           // console.log(stats);
           fileType = path.extname(file.name).slice(1);
-          fileSize = stats.size / 1000;
+          fileSize = stats.size / 1024;
           fileName = path.parse(pathToFile).name;
-          console.log(`${fileName} - ${fileType} - ${fileSize}kb`);
+          console.log(`${fileName} - ${fileType} - ${fileSize} kb`);
         }
       });
     }
